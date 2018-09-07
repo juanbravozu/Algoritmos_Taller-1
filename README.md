@@ -1,6 +1,6 @@
-#Taller 1 - Juan David Bravo
+# Taller 1 - Juan David Bravo
 
-###Clase Iterator
+### Clase Iterator
 Hace cositas bien cool
 ##### **Métodos:**
 * **El primero**
