@@ -2,6 +2,6 @@
 
 ### Clase Iterator
 Hace cositas bien cool
-##### **Métodos:**
+#### **MÃ©todos:**
 * **El primero**
 * **El segundo**
