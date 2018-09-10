@@ -7,6 +7,7 @@ public class Logica {
 	private PApplet app;
 	private int etapa;
 	private Etapa[] etapas;
+	private String[] texto;
 	
 	public Logica(PApplet app) {
 		etapas = new Etapa[5];
