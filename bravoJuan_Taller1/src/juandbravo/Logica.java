@@ -50,7 +50,7 @@ public class Logica {
 			break;
 			
 		case 1:
-			
+			((Negacion)etapas[1]).click();
 		}
 	}
 	
