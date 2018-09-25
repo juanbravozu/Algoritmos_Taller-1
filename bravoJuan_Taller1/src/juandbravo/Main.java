@@ -4,7 +4,6 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 
-	private PApplet app;
 	private Logica log;
 	
 	public static void main(String[] args) {
@@ -12,23 +11,23 @@ public class Main extends PApplet {
 	}
 	
 	public void settings() {
-		
+		size(1200, 700);
 	}
 	
 	public void setup() {
-		
+		log = new Logica(this);
 	}
 	
 	public void draw() {
-		
+		log.dibujar();
 	}
 	
 	public void mousePressed() {
-		
+		log.click();
 	}
 	
 	public void keyPressed() {
-		
+		log.tecla();
 	}
 
 }
