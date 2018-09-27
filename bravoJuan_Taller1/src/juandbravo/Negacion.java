@@ -11,15 +11,15 @@ public class Negacion extends Etapa {
 		super(app);
 		palabras = app.splitTokens(texto);
 		opacidad = 255;
-		System.out.println(palabras[3]);
-		System.out.println(palabras[10]);
-		System.out.println(palabras[11]);
-		System.out.println(palabras[12]);
 	}
 	
 	public void pintar() {
 		app.background(0);
 		pintarCara();
+		app.fill(70);
+		app.textAlign(app.CENTER);
+		app.textSize(20);
+		app.text("Presiona ESPACIO para continuar", x, y+300);
 		for (int i = 0; i < palabras.length; i++) {
 			if(i != 0 && i != palabras.length-1) {
 				if(palabras[i+1] == " " && palabras[i] == " " && palabras[i-1] == " ") {
@@ -45,13 +45,18 @@ public class Negacion extends Etapa {
 		app.quad(x-500, y-160, x+400, y-165, x+350, y-195, x-350, y-190);
 	}
 	
-	public void click() {
-		if(app.mouseX > x-500 && app.mouseX < x+450 && app.mouseY < 160 && app.mouseY > y-245) {
+	public void tecla() {
+		if(app.key == ' ') {
 			for (int i = 0; i < palabras.length; i++) {
 				if(i != 3 && i != 10 && i != 11 && i != 12) {
 					palabras[i] = " ";
+					texto = app.join(palabras, ' ');
 				}
 			}
 		}
+	}
+	
+	public int getOpacidad() {
+		return opacidad;
 	}
 }

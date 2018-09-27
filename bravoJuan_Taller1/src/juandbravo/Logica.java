@@ -14,7 +14,7 @@ public class Logica {
 	
 	public Logica(PApplet app) {
 		this.app = app;
-		etapa = 1;
+		etapa = 2;
 		texto = app.loadStrings("texto.txt");
 		etapas = new Etapa[6];
 		
@@ -34,23 +34,36 @@ public class Logica {
 			
 		case 1: 
 			etapas[1].pintar();
+			break;
+			
+		case 2:
+			etapas[2].pintar();
 		}
 	}
 
 	public void click() {
+		
 		switch(etapa) {
 		case 0:
 			((Duelo) etapas[0]).click();
 			texto[0] = etapas[0].devolverTexto();
-			System.out.println(etapas[0].devolverTexto());
 			if(((Duelo)etapas[0]).getLloviendo()) {
 				crearTxt(etapa);
 				etapa++;
+				String[] temp;
+				temp = app.loadStrings("textoActualizado.txt");
+				for (int i = 0; i < temp.length; i++) {
+					System.out.println(temp[i]);
+				}
 			}
 			break;
 			
-		case 1:
-			((Negacion)etapas[1]).click();
+		case 2:
+			((Ira)etapas[2]).click();
+			if(((Ira)etapas[2]).getFill() >= 45) {
+				etapa++;
+			}
+			break;
 		}
 	}
 	
@@ -59,7 +72,17 @@ public class Logica {
 	}
 	
 	public void tecla() {
-		
+		switch(etapa) {
+		case 1:
+			((Negacion)etapas[1]).tecla();
+			texto[1] = etapas[1].devolverTexto();
+			if(((Negacion)etapas[1]).getOpacidad() <= 0) {
+				actualizarTxt(etapa);
+				etapa++;
+				String[] temp;
+				temp = app.loadStrings("textoActualizado.txt");
+			}
+		}
 	}
 	
 	public void crearTxt(int etapa) {
@@ -77,8 +100,12 @@ public class Logica {
 	public void actualizarTxt(int etapa) {
 		try {
 		BufferedWriter bw = new BufferedWriter(new FileWriter("textoActualizado.txt"));
-		bw.newLine();
-		bw.write(texto[etapa]);
+		bw.write(texto[0]);
+		for(int i = 1; i <= etapa; i++) {
+			bw.newLine();
+			bw.write(texto[i]);
+		}
+		
 		bw.flush();
 		bw.close();
 		} catch(Exception e) {
