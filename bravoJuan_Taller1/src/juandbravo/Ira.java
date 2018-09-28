@@ -6,23 +6,104 @@ public class Ira extends Etapa {
 
 	private int clic;
 	private int fill;
+	private String[] palabras;
 	
-	public Ira(PApplet app) {
+	public Ira(PApplet app, String texto) {
 		super(app);
 		fill = 0;
+		palabras = app.splitTokens(texto);
 	}
 	
 	public void pintar() {
+		clic = 0;
+		boolean a = false, e = false, i = false, o = false, u = false;
+		for (int ind = 0; ind < palabras.length; ind++) {
+			for (int j = 0; j < palabras[ind].length(); j++) {
+				if(palabras[ind].charAt(j) == 'A' && !a) {
+					clic++;
+					a = true;
+				} 
+				
+				if(palabras[ind].charAt(j) == 'E' && !e) {
+					clic++;
+					e = true;
+				} 
+				
+				if(palabras[ind].charAt(j) == 'I' && !i) {
+					clic++;
+					i = true;
+				} 
+				
+				if(palabras[ind].charAt(j) == 'O' && !o) {
+					clic++;
+					o = true;
+				}
+				
+				if(palabras[ind].charAt(j) == 'U' && !u) {
+					clic++;
+					u = true;
+				} 
+			}
+		}
 		app.background(fill);
 		romperPantalla();
 		if(clic == 5 && fill <= 45) {
 			fill++;
+			texto = app.join(palabras, ' ');
 		}
 	}
 	
 	public void click() {
-		if(clic <= 4 ) {
-			clic++;
+		switch(clic) {
+		case 0:
+			for (int i = 0; i < palabras.length; i++) {
+				for (int j = 0; j < palabras[i].length(); j++) {
+					if(palabras[i].charAt(j) == 'a') {
+						palabras[i] = palabras[i].replace('a', 'A');
+					}
+				}
+			}
+			break;
+			
+		case 1:
+			for (int i = 0; i < palabras.length; i++) {
+				for (int j = 0; j < palabras[i].length(); j++) {
+					if(palabras[i].charAt(j) == 'e') {
+						palabras[i] = palabras[i].replace('e', 'E');
+					}
+				}
+			}
+			break;
+			
+		case 2:
+			for (int i = 0; i < palabras.length; i++) {
+				for (int j = 0; j < palabras[i].length(); j++) {
+					if(palabras[i].charAt(j) == 'i') {
+						palabras[i] = palabras[i].replace('i', 'I');
+					}
+				}
+			}
+			break;
+			
+		case 3:
+			for (int i = 0; i < palabras.length; i++) {
+				for (int j = 0; j < palabras[i].length(); j++) {
+					if(palabras[i].charAt(j) == 'o') {
+						palabras[i] = palabras[i].replace('o', 'O');
+					}
+				}
+			}
+			break;
+			
+		case 4:
+			for (int i = 0; i < palabras.length; i++) {
+				for (int j = 0; j < palabras[i].length(); j++) {
+					if(palabras[i].charAt(j) == 'u') {
+						palabras[i] = palabras[i].replace('u', 'U');
+					}
+				}
+			}
+			break;
 		}
 		
 	}

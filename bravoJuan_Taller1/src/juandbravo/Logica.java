@@ -14,14 +14,14 @@ public class Logica {
 	
 	public Logica(PApplet app) {
 		this.app = app;
-		etapa = 2;
+		etapa = 3;
 		texto = app.loadStrings("texto.txt");
 		etapas = new Etapa[6];
 		
 		etapas[0] = new Duelo(app, texto[0]);
 		etapas[1] = new Negacion(app, texto[1]);		
-		etapas[2] = new Ira(app);
-		etapas[3] = new Negociacion(app);
+		etapas[2] = new Ira(app, texto[2]);
+		etapas[3] = new Negociacion(app, texto[3]);
 		etapas[4] = new Depresion(app);
 		etapas[5] = new Aceptacion(app);
 	}
@@ -38,6 +38,10 @@ public class Logica {
 			
 		case 2:
 			etapas[2].pintar();
+			break;
+			
+		case 3:
+			etapas[3].pintar();
 		}
 	}
 
@@ -61,6 +65,8 @@ public class Logica {
 		case 2:
 			((Ira)etapas[2]).click();
 			if(((Ira)etapas[2]).getFill() >= 45) {
+				texto[2] = etapas[2].devolverTexto();
+				actualizarTxt(etapa);
 				etapa++;
 			}
 			break;
@@ -79,8 +85,15 @@ public class Logica {
 			if(((Negacion)etapas[1]).getOpacidad() <= 0) {
 				actualizarTxt(etapa);
 				etapa++;
-				String[] temp;
-				temp = app.loadStrings("textoActualizado.txt");
+			}
+			break;
+			
+		case 3:
+			((Negociacion)etapas[3]).tecla();
+			if(app.key == ' ') {
+				texto[3] = etapas[3].devolverTexto();
+				actualizarTxt(etapa);
+				etapa++;
 			}
 		}
 	}
