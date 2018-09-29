@@ -4,7 +4,7 @@ import processing.core.PApplet;
 
 public class Ira extends Etapa {
 
-	private int clic;
+	private int clic;//Lleva la cuenta de los clicks que se han dado
 	private int fill;
 	private String[] palabras;
 	
@@ -14,6 +14,7 @@ public class Ira extends Etapa {
 		palabras = app.splitTokens(texto);
 	}
 	
+	//Pinta elementos y revisa los caracteres de cada palabra en el arreglo, si encuentra una vocal en mayúscula, suma al contador clic
 	public void pintar() {
 		clic = 0;
 		boolean a = false, e = false, i = false, o = false, u = false;
@@ -53,6 +54,7 @@ public class Ira extends Etapa {
 		}
 	}
 	
+	//Realiza las interacciones del mouse, cambiando el texto cada vez
 	public void click() {
 		switch(clic) {
 		case 0:
@@ -107,7 +109,8 @@ public class Ira extends Etapa {
 		}
 		
 	}
-	
+
+	//Pinta el elemento gráfico de esta etapa
 	public void romperPantalla() {
 		 switch(clic) {
 		 case 5:

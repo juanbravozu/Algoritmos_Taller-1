@@ -8,13 +8,14 @@ import java.io.FileWriter;
 public class Logica {
 	
 	private PApplet app;
-	private int etapa;
-	private Etapa[] etapas;
-	private String[] texto;
+	private int etapa;//Indica en cuál etapa se encuentra
+	private Etapa[] etapas;//Arreglo con las 6 etapas
+	private String[] texto;//Arreglo con el texto separado en 6 líneas
 	
+	//Inicializa cada variable y arreglo
 	public Logica(PApplet app) {
 		this.app = app;
-		etapa = 3;
+		etapa = 0;
 		texto = app.loadStrings("texto.txt");
 		etapas = new Etapa[6];
 		
@@ -22,10 +23,11 @@ public class Logica {
 		etapas[1] = new Negacion(app, texto[1]);		
 		etapas[2] = new Ira(app, texto[2]);
 		etapas[3] = new Negociacion(app, texto[3]);
-		etapas[4] = new Depresion(app);
-		etapas[5] = new Aceptacion(app);
+		etapas[4] = new Depresion(app, texto[4]);
+		etapas[5] = new Aceptacion(app, texto[5]);
 	}
 	
+	//Pinta cada etapa
 	public void dibujar() {
 		switch(etapa) {
 		case 0:
@@ -42,9 +44,19 @@ public class Logica {
 			
 		case 3:
 			etapas[3].pintar();
+			break;
+			
+		case 4:
+			etapas[4].pintar();
+			break;
+			
+		case 5:
+			etapas[5].pintar();
 		}
+		
 	}
 
+	//Ejecuta todas las acciones del mouse
 	public void click() {
 		
 		switch(etapa) {
@@ -70,13 +82,17 @@ public class Logica {
 				etapa++;
 			}
 			break;
+			
+		case 4:
+			((Depresion)etapas[4]).click();
+			break;
+			
+		case 5:
+			((Aceptacion)etapas[5]).click();
 		}
 	}
 	
-	public void clickMan() {
-		
-	}
-	
+	//Ejecuta todas las interacciones del teclado
 	public void tecla() {
 		switch(etapa) {
 		case 1:
@@ -95,9 +111,26 @@ public class Logica {
 				actualizarTxt(etapa);
 				etapa++;
 			}
+			break;
+			
+		case 4:
+			if(app.key == ' ') {
+				texto[4] = etapas[4].devolverTexto();
+				actualizarTxt(etapa);
+				etapa++;
+			}
+			break;
+			
+		case 5:
+			if(app.key == ' ' && ((Aceptacion)etapas[5]).getOpacidad() >= 255) {
+				texto[5] = etapas[5].devolverTexto();
+				actualizarTxt(etapa);
+				app.exit();
+			}
 		}
 	}
 	
+	//Crea un nuevo archivo .txt y guarda en él la primera linea de texto
 	public void crearTxt(int etapa) {
 		try {
 			File archivo = new File("textoActualizado.txt");
@@ -110,6 +143,7 @@ public class Logica {
 		}
 	}
 	
+	//Guarda en el archivo .txt ya creado nueva información
 	public void actualizarTxt(int etapa) {
 		try {
 		BufferedWriter bw = new BufferedWriter(new FileWriter("textoActualizado.txt"));

@@ -10,6 +10,7 @@ public class Gota {
 	float vel;
 	float tam;
 	
+	//Las gotas se crean en posiciones aleatorias arriba del lienzo
 	public Gota(PApplet app) {
 		this.app = app;
 		x = app.random(app.width);
@@ -18,12 +19,14 @@ public class Gota {
 		tam = app.random(10, 20);
 	}
 	
+	//Pinta la gota
 	public void pintar() {
 		app.stroke(66, 183, 224);
 		app.strokeWeight(1);
 		app.line(x, y, x, y + tam);
 	}
 	
+	//Hace que la gota caiga
 	public void caer() {
 		y += vel;
 		vel += 0.02;

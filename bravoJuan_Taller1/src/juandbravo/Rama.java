@@ -25,11 +25,7 @@ public class Rama {
       dify = (fin.y - inicio.y)/60;
 	}
 		  
-	public void randomizar(){
-		fin.x += app.random(-1, 1);
-		fin.y += app.random(-1, 1);
-	}
-		  
+	//Pinta las ramas
 	public void pintar(){
 		app.stroke(255);
 		app.strokeWeight(2);
@@ -45,6 +41,7 @@ public class Rama {
 	     }
 	}
 		  
+	//Crea una nueva rama hacia la derecha desde el final de la rama anterior
 	public Rama ramaA(){
 		PVector dir = PVector.sub(fin, inicio);
 		dir.rotate(app.PI / 6);
@@ -54,6 +51,7 @@ public class Rama {
 	    return b;
 	}
 		  
+	//Crea una nueva rama hacia la izquierda desde el final de la rama anterior
 	public Rama ramaB(){
 	    PVector dir = PVector.sub(fin, inicio);
 	    dir.rotate(- app.PI / 4);
@@ -63,6 +61,7 @@ public class Rama {
 	    return b;
 	}
 	
+	//Hace caer las hojas
 	public void caer(float vel) {
 		boolean caer = false;
 	    if(complet) {

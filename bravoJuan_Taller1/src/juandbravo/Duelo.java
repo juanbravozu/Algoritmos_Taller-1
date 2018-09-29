@@ -4,15 +4,16 @@ import java.util.ArrayList;
 import processing.core.PApplet;
 import processing.core.PVector;
 
-public class Duelo extends Etapa {
+public class Duelo extends Etapa {//Representa el inicio del duelo
 
-	private ArrayList<Rama> arbol;
-	private int count;
-	private float vel;
-	private String[] palabras;
-	private Gota[] lluvia;
-	private boolean lloviendo;
+	private ArrayList<Rama> arbol;//Lista con las diferentes ramas del árbol
+	private int count;//Cuenta la cantidad de clicks que ha dado el usuario
+	private float vel;//La velocidad a la que caen las hojas
+	private String[] palabras;//Arreglo con la línea de texto correspondiente a esta etapa
+	private Gota[] lluvia;//Arreglo de gotas para la lluvia
+	private boolean lloviendo;//Dice si está lloviendo o no
 	
+	//Se inicializa cada variable y arreglo
 	public Duelo(PApplet app, String texto) {
 		super(app);
 		arbol = new ArrayList<Rama>();
@@ -23,7 +24,6 @@ public class Duelo extends Etapa {
 		Rama raiz = new Rama(app, a, b); 
 		arbol.add(raiz);
 		this.texto = texto;
-//		System.out.println(this.texto);
 		palabras = texto.split(" ");	
 		lluvia = new Gota[300];
 		lloviendo = false;
@@ -34,8 +34,8 @@ public class Duelo extends Etapa {
 
 	public void pintar() {
 		count = 0;
-		texto = app.join(palabras, ' ');
-		for (int i = 0; i < palabras.length; i++) {
+		texto = app.join(palabras, ' ');					
+		for (int i = 0; i < palabras.length; i++) {	//----------------------//Cada que encuentra la palabra DUELO, el contador aumenta, representando que se ha dado click
 			if(palabras[i] == "DUELO" && count < 8) {
 				count++;
 			}
@@ -76,6 +76,7 @@ public class Duelo extends Etapa {
 		}
 	}
 	
+	//Interaccion al hacer click
 	public void click() {
 		System.out.println(count);
 		if(count < 8) {
@@ -85,17 +86,17 @@ public class Duelo extends Etapa {
 			    	arbol.add(r.ramaA());
 			    	arbol.add(r.ramaB());
 				    r.setFinali(true);
-				    palabras[count] = "DUELO";
+				    palabras[count] = "DUELO";						//Reemplaza las primeras palabras cada que se hace click
 			    }		    
 			}		
 		} else {
-			for(int i = count; i < palabras.length; i++) {
+			for(int i = count; i < palabras.length; i++) {    		//Reemplaza el resto de palabras
 				palabras[i] = "PERDIDA";
 			}					
 		} 
 	}
 	
-	public boolean getLloviendo() {
+	public boolean getLloviendo() {	
 		return lloviendo;
 	}
 }

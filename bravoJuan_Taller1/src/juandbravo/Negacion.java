@@ -13,6 +13,7 @@ public class Negacion extends Etapa {
 		opacidad = 255;
 	}
 	
+	//Pinta todos los elementos en pantalla
 	public void pintar() {
 		app.background(0);
 		pintarCara();
@@ -30,6 +31,7 @@ public class Negacion extends Etapa {
 		}
 	}
 	
+	//Pinta la cara
 	public void pintarCara() {
 		app.fill(160, opacidad);
 		app.noStroke();
@@ -45,6 +47,7 @@ public class Negacion extends Etapa {
 		app.quad(x-500, y-160, x+400, y-165, x+350, y-195, x-350, y-190);
 	}
 	
+	//Realiza las interacciones con el teclado
 	public void tecla() {
 		if(app.key == ' ') {
 			for (int i = 0; i < palabras.length; i++) {

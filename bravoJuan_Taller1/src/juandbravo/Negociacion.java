@@ -18,12 +18,15 @@ public class Negociacion extends Etapa {
 		ang = 0;
 	}
 	
+	//Pinta los elementos 
 	public void pintar() {
 		app.background(fondo);
-		app.fill(20, opacidad);
-		app.triangle(x-500, y, x-200, y+150, x-200, y-150);
-		app.triangle(x+500, y, x+200, y+150, x+200, y-150);
-		if(fondo != 0) {
+		app.fill(40, opacidad);
+		app.textAlign(app.CENTER);
+		
+		app.text("Usa las FLECHAS para interactuar", x, y+310);
+		app.text("Presiona ESPACIO para continuar", x, y+330);
+		if(fondo != 0) { //Transicion entre etapa anterior y esta
 			fondo--;
 		} else if(opacidad+2 < 255) {
 			opacidad += 2;
@@ -36,6 +39,7 @@ public class Negociacion extends Etapa {
 		}
 	}
 	
+	//Interacciones con el teclado
 	public void tecla() {
 		if(app.keyCode == app.LEFT) {
 			palabras[12] = "####";
@@ -48,6 +52,7 @@ public class Negociacion extends Etapa {
 		}
 	}
 	
+	//Cambia el ángulo de rotacion
 	public void rotar() {
 		for (int i = 0; i < palabras.length; i++) {
 			if(palabras[i] == "####" && ang > -45) {
@@ -58,6 +63,7 @@ public class Negociacion extends Etapa {
 		}
 	}
 	
+	//Pinta la balanza y rota algunas partes de esta
 	public void pintarBal() {
 		app.noStroke();
 		app.fill(214, 115, 10, opacidad);
@@ -97,7 +103,7 @@ public class Negociacion extends Etapa {
 		app.line(x2, y2+150, x2+80, y2+230);
 		app.fill(175, 38, 0, opacidad);
 		app.noStroke();
-		app.rect(x2, y2+215, 60, 60);
+		app.rect(x2, y2+214, 60, 60);
 		app.fill(214, 115, 10, opacidad);
 		app.arc(x2, y2+230, 160, 30, 0, app.PI);
 		app.popMatrix();

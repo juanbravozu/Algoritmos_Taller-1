@@ -7,7 +7,7 @@ public abstract class Etapa {
 	protected PApplet app;
 	protected float x;
 	protected float y;
-	protected String texto;
+	protected String texto; //Línea de texto a modificar
 	
 	public Etapa(PApplet app) {
 		this.app = app;
@@ -17,10 +17,7 @@ public abstract class Etapa {
 	
 	public abstract void pintar();
 	
-	public boolean sigEtapa() {
-		return true;
-	}
-	
+	//Retorna el texto para guardarlo en el archivo .txt
 	public String devolverTexto() {
 		return texto;
 	}
